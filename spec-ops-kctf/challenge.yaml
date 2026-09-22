@@ -1,0 +1,43 @@
+# challenge.yaml -- kCTF Kubernetes manifest for Spec Ops
+# Raw-TCP pwn challenge, same CRD shape as the other pwn challenges in
+# this set (open-sesame-kctf, postcard-kctf).
+
+apiVersion: kctf.dev/v1
+kind: Challenge
+metadata:
+  name: spec-ops
+
+spec:
+  deployed: true
+
+  powDifficultySeconds: 10
+
+  network:
+    public: true
+    ports:
+      - protocol: "TCP"
+        targetPort: 1337
+
+  healthcheck:
+    enabled: true
+    image: gcr.io/YOUR_GCP_PROJECT/spec-ops-healthcheck:latest
+
+  image: gcr.io/YOUR_GCP_PROJECT/spec-ops-challenge:latest
+
+  podTemplate:
+    template:
+      spec:
+        containers:
+          - name: challenge
+            resources:
+              requests:
+                cpu: "100m"
+                memory: "128Mi"
+              limits:
+                cpu: "250m"
+                memory: "256Mi"
+
+  horizontalPodAutoscalerSpec:
+    minReplicas: 1
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 75
