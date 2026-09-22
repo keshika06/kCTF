@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head><title>LinkAudit Pro -- Audit Report</title></head>
+<body>
+  <h1>Audit Report</h1>
+  <p>Submitted: {{ url }}</p>
+  <ol>
+    {% for hop in hops %}
+    <li>{{ hop.url }} &rarr; HTTP {{ hop.status }}</li>
+    {% endfor %}
+  </ol>
+  <h2>Response body</h2>
+  <pre>{{ body }}</pre>
+  <p><a href="/">Audit another URL</a></p>
+</body>
+</html>

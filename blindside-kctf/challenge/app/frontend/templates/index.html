@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+<head><title>LinkAudit Pro</title></head>
+<body>
+  <h1>LinkAudit Pro</h1>
+  <p>Enterprise URL auditing. Submit a link and our crawler will fetch it
+     and hand back an audit report.</p>
+  {% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+  <form method="post" action="/audit">
+    <input type="text" name="url" size="60" value="{{ url or '' }}" placeholder="https://example.com/page">
+    <button type="submit">Audit</button>
+  </form>
+</body>
+</html>
